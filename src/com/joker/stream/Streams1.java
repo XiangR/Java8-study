@@ -2,6 +2,7 @@ package com.joker.stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 
@@ -21,62 +22,70 @@ public class Streams1 {
 		stringCollection.add("ccc");
 		stringCollection.add("bbb2");
 		stringCollection.add("ddd1");
+		stringCollection.add("11");
+		stringCollection.add("12");
 
 		/*
 		 * filtering
 		 * 输出结果："aaa2", "aaa1"
 		 */
 		stringCollection.stream().filter((s) -> s.startsWith("a")).forEach(System.out::println);
+
 		/*
 		 * filter 中添加 map 来遍历每一个元素
-		 * 支持String 无参数的方法如 trim，toUpperCase
+		 * 
 		 * 输出结果：AAA2 AAA1
 		 */
 		stringCollection.stream().filter((s) -> s.startsWith("a")).map(String::toUpperCase).forEach(System.out::println);
 
-		// sorting
-		// stringCollection.stream().sorted().filter((s) ->
-		// s.startsWith("a")).forEach(System.out::println);
-		// "aaa1", "aaa2"
+		/*
+		 * sorted
+		 * 
+		 * 支持传参指定顺序，也可使用默认顺序
+		 * 输出结果：AAA2 AAA1
+		 */
+		stringCollection.stream().filter((s) -> s.startsWith("a")).sorted((a, b) -> b.compareTo(a)).map(String::toUpperCase).forEach(System.out::println);
 
-		// mapping
-		// stringCollection.stream().map(String::toUpperCase).sorted((a, b) ->
-		// b.compareTo(a)).forEach(System.out::println);
+		/*
+		 * mapping
+		 * 
+		 * 可以批量的对集合里的变量进行统一的更改
+		 * 支持传入指定形式
+		 * 
+		 */
+		stringCollection.stream().map(String::toUpperCase).forEach(System.out::println);
+		stringCollection.stream().map((s) -> s.toUpperCase()).forEach(System.out::println);
 
-		// "DDD2", "DDD1", "CCC", "BBB3", "BBB2", "AAA2", "AAA1"
+		/*
+		 * matching
+		 * 支持快速筛选 并且返回Boolean
+		 */
+		boolean anyStartsWithA = stringCollection.stream().anyMatch((s) -> s.startsWith("a"));
+		System.out.println(anyStartsWithA); // true
 
-		// matching
+		boolean allStartsWithA = stringCollection.stream().allMatch((s) -> s.startsWith("a"));
+		System.out.println(allStartsWithA); // false
 
-		// boolean anyStartsWithA = stringCollection.stream().anyMatch((s) ->
-		// s.startsWith("a"));
+		boolean noneStartsWithZ = stringCollection.stream().noneMatch((s) -> s.startsWith("q"));
+		System.out.println(noneStartsWithZ); // true
 
-		// System.out.println(anyStartsWithA); // true
+		/*
+		 * math
+		 * 将集合中的数据筛选出int后
+		 * count 得到数量
+		 * sum 计算总和
+		 */
+		long startsWithA = stringCollection.stream().filter((s) -> s.startsWith("1")).mapToInt(i -> Integer.valueOf(i)).count();
+		long startsWithB = stringCollection.stream().filter((s) -> s.startsWith("1")).mapToInt(i -> Integer.valueOf(i)).sum();
 
-		// boolean allStartsWithA = stringCollection.stream().allMatch((s) ->
-		// s.startsWith("a"));
+		System.out.println(startsWithA); // 3
+		System.out.println(startsWithB); // 23
 
-		// System.out.println(allStartsWithA); // false
-
-		// boolean noneStartsWithZ = stringCollection.stream().noneMatch((s) ->
-		// s.startsWith("z"));
-
-		// System.out.println(noneStartsWithZ); // true
-
-		// counting
-
-		// long startsWithB = stringCollection.stream().filter((s) ->
-		// s.startsWith("b")).count();
-
-		// System.out.println(startsWithB); // 3
-
-		// reducing
-
-		// Optional<String> reduced =
-		// stringCollection.stream().sorted().reduce((s1, s2) -> s1 + "#" + s2);
-
-		// reduced.ifPresent(System.out::println);
-		// "aaa1#aaa2#bbb1#bbb2#bbb3#ccc#ddd1#ddd2"
-
+		/*
+		 * reducing
+		 * "aaa1#aaa2#bbb1#bbb2#bbb3#ccc#ddd1#ddd2"
+		 */
+		Optional<String> reduce = stringCollection.stream().sorted().reduce((s1, s2) -> s1 + "#" + s2);
+		reduce.ifPresent(System.out::println);
 	}
-
 }
