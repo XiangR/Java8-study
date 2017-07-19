@@ -27,30 +27,30 @@ public class Streams1 {
 
 		/*
 		 * filtering
-		 * Êä³ö½á¹û£º"aaa2", "aaa1"
+		 * è¾“å‡ºç»“æžœï¼š"aaa2", "aaa1"
 		 */
 		stringCollection.stream().filter((s) -> s.startsWith("a")).forEach(System.out::println);
 
 		/*
-		 * filter ÖÐÌí¼Ó map À´±éÀúÃ¿Ò»¸öÔªËØ
+		 * filter ä¸­æ·»åŠ  map æ¥éåŽ†æ¯ä¸€ä¸ªå…ƒç´ 
 		 * 
-		 * Êä³ö½á¹û£ºAAA2 AAA1
+		 * è¾“å‡ºç»“æžœï¼šAAA2 AAA1
 		 */
 		stringCollection.stream().filter((s) -> s.startsWith("a")).map(String::toUpperCase).forEach(System.out::println);
 
 		/*
 		 * sorted
 		 * 
-		 * Ö§³Ö´«²ÎÖ¸¶¨Ë³Ðò£¬Ò²¿ÉÊ¹ÓÃÄ¬ÈÏË³Ðò
-		 * Êä³ö½á¹û£ºAAA2 AAA1
+		 * æ”¯æŒä¼ å‚æŒ‡å®šé¡ºåºï¼Œä¹Ÿå¯ä½¿ç”¨é»˜è®¤é¡ºåº
+		 * è¾“å‡ºç»“æžœï¼šAAA2 AAA1
 		 */
 		stringCollection.stream().filter((s) -> s.startsWith("a")).sorted((a, b) -> b.compareTo(a)).map(String::toUpperCase).forEach(System.out::println);
 
 		/*
 		 * mapping
 		 * 
-		 * ¿ÉÒÔÅúÁ¿µÄ¶Ô¼¯ºÏÀïµÄ±äÁ¿½øÐÐÍ³Ò»µÄ¸ü¸Ä
-		 * Ö§³Ö´«ÈëÖ¸¶¨ÐÎÊ½
+		 * å¯ä»¥æ‰¹é‡çš„å¯¹é›†åˆé‡Œçš„å˜é‡è¿›è¡Œç»Ÿä¸€çš„æ›´æ”¹
+		 * æ”¯æŒä¼ å…¥æŒ‡å®šå½¢å¼
 		 * 
 		 */
 		stringCollection.stream().map(String::toUpperCase).forEach(System.out::println);
@@ -58,7 +58,7 @@ public class Streams1 {
 
 		/*
 		 * matching
-		 * Ö§³Ö¿ìËÙÉ¸Ñ¡ ²¢ÇÒ·µ»ØBoolean
+		 * æ”¯æŒå¿«é€Ÿç­›é€‰ å¹¶ä¸”è¿”å›žBoolean
 		 */
 		boolean anyStartsWithA = stringCollection.stream().anyMatch((s) -> s.startsWith("a"));
 		System.out.println(anyStartsWithA); // true
@@ -71,9 +71,9 @@ public class Streams1 {
 
 		/*
 		 * math
-		 * ½«¼¯ºÏÖÐµÄÊý¾ÝÉ¸Ñ¡³öintºó
-		 * count µÃµ½ÊýÁ¿
-		 * sum ¼ÆËã×ÜºÍ
+		 * å°†é›†åˆä¸­çš„æ•°æ®ç­›é€‰å‡ºintåŽ
+		 * count å¾—åˆ°æ•°é‡
+		 * sum è®¡ç®—æ€»å’Œ
 		 */
 		long startsWithA = stringCollection.stream().filter((s) -> s.startsWith("1")).mapToInt(i -> Integer.valueOf(i)).count();
 		long startsWithB = stringCollection.stream().filter((s) -> s.startsWith("1")).mapToInt(i -> Integer.valueOf(i)).sum();
