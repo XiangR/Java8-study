@@ -6,8 +6,10 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 
  * @author xiangR
- * @date : 2017年7月19日 上午11:21:43
+ * @date 2017年7月19日下午1:28:38
+ *
  */
 public class Streams3 {
 
@@ -19,6 +21,7 @@ public class Streams3 {
 		 * 但是其不具有线程传播性
 		 */
 		sortSequential(); // sequential sort took: 1534 ms
+		System.out.println("\n--------------\n");
 		sortParallel(); // parallel sort took: 637 ms
 
 		printSequential();
@@ -29,11 +32,15 @@ public class Streams3 {
 	public static void printSequential() {
 		List<Integer> numbers = getIntegerList(100);
 		numbers.stream().map(s -> "Sequential - " + s).forEach(System.out::println);
+		int sum = numbers.parallelStream().mapToInt(a -> a).sum();
+		System.out.println(sum); // sum -> 4950
 	}
 
 	public static void printParallel() {
 		List<Integer> numbers = getIntegerList(100);
 		numbers.parallelStream().map(s -> "Parallel - " + s).forEach(System.out::println);
+		int sum = numbers.parallelStream().mapToInt(a -> a).sum();
+		System.out.println(sum); // sum -> 4950
 	}
 
 	public static void sortSequential() {
