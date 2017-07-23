@@ -25,6 +25,23 @@ public class Streams5 {
 		test6(strings);
 		test7(strings);
 		test8(strings);
+		supplier();
+	}
+
+	private static void supplier() {
+		/*
+		 * 使用这种形式来储存流同样会报 stream has already been operated upon or closed
+		 * 可以选择使用下面的形式
+		 * 
+		 * Stream<String> stream = Stream.of(new String("your"), new
+		 * String("world"));
+		 * Supplier<Stream<String>> streamSupplier = () -> stream;
+		 */
+
+		Supplier<Stream<String>> streamSupplier = () -> Stream.of(new String("your"), new String("world"));
+
+		streamSupplier.get().forEach(v -> System.out.println("map1 -> " + v));
+		streamSupplier.get().forEach(v -> System.out.println("map2 -> " + v));
 	}
 
 	/*
