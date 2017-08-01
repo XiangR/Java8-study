@@ -53,7 +53,7 @@ public class Streams7 {
 				.peek(f -> IntStream.range(1, 4).mapToObj(num -> new Bar("Bar" + num + " <- " + f.name)).forEach(f.bars::add))
 				.flatMap(f -> f.bars.stream()).forEach(b -> System.out.println(b.name));
 	}
-
+	
 	static void test1() {
 		List<Foo> foos = new ArrayList<>();
 		IntStream.range(1, 4).forEach(num -> foos.add(new Foo("Foo" + num)));
