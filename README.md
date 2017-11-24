@@ -15,4 +15,6 @@ stream的并行与串行
 3:现在我是第三分支
 
 现在开始测试分支的冲突
-1:新的内容
+branch_3
+1:新的内容 branch_3
+2:mster的内容 master
